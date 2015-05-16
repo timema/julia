@@ -53,7 +53,7 @@ function package(
             repo
         end
 
-        LibGit2.transact(repo, dir=pkg) do repo
+        LibGit2.transact(repo) do repo
             if isempty(authors)
                 authors = isnew ? copyright_name(repo) : git_contributors(repo,5)
             end
