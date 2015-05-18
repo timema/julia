@@ -29,6 +29,9 @@ New language features
     and macros in packages and user code ([#8791]). Type `?@doc` at the repl
     to see the current syntax and more information.
 
+  * Varargs functions like `foo{T}(x::T...)` may now restrict the number
+    of such arguments using `foo{T,N}(x::Vararg{T,N})` ([#11242]).
+
 Language changes
 ----------------
 
@@ -110,6 +113,9 @@ Language changes
   * A custom triple-quoted string like `x"""..."""` no longer invokes an `x_mstr`
     macro. Instead, the string is first unindented and then `x_str` is invoked,
     as if the string had been single-quoted ([#10228]).
+
+  * The built-in `NTuple` type has been removed; `NTuple{N,T}` is now
+    implemented internally as `Tuple{Vararg{T,N}}` ([#11242]).
 
 Compiler improvements
 ---------------------
@@ -1408,3 +1414,4 @@ Too numerous to mention.
 [#10914]: https://github.com/JuliaLang/julia/issues/10914
 [#10994]: https://github.com/JuliaLang/julia/issues/10994
 [#11145]: https://github.com/JuliaLang/julia/issues/11145
+[#11242]: https://github.com/JuliaLang/julia/issues/11242
