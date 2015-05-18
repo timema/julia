@@ -111,9 +111,15 @@ end
 
 function complete_path(path::AbstractString, pos)
     if ismatch(r"^~(?:/|$)", path)
-        path = homedir() * path[2:end]
+        if endof(path) == 1
+            dir = homedir()
+            prefix = ""
+        else
+            dir, prefix = splitdir(homedir() * path[2:end])
+        end
+    else
+        dir, prefix = splitdir(path)
     end
-    dir, prefix = splitdir(path)
     local files
     try
         if length(dir) == 0
